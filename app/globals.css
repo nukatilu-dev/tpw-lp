@@ -17,3 +17,989 @@
 .auth-brand{left:21px;top:20px}.auth-back{right:20px;top:31px;font-size:9px}.auth-layout{grid-template-columns:1fr}.auth-visual{display:none}.auth-form-wrap{min-height:100vh;padding:110px 25px 30px}.auth-form{max-width:390px}.auth-form-footer{max-width:390px;margin-top:38px}.auth-form h2{font-size:34px}
 .dashboard-sidebar{width:260px;transform:translateX(-100%);transition:transform .25s;box-shadow:15px 0 40px #0005}.dashboard-sidebar.sidebar-open{transform:translateX(0)}.mobile-overlay{display:block;position:fixed;inset:0;background:#0008;border:0;z-index:7}.dashboard-main{margin-left:0}.dashboard-topbar{height:55px;padding:0 16px}.mobile-menu{display:grid;place-items:center;background:transparent;border:0;color:#ddd;padding:4px;margin-right:9px}.breadcrumb{margin-right:auto}.topbar-actions{gap:12px}.dashboard-content{padding:32px 18px 55px}.dashboard-greeting{align-items:flex-start;flex-direction:column;gap:17px}.dashboard-greeting h1,.simple-section h1{font-size:30px}.dashboard-greeting>.button{height:37px}.dashboard-stats{grid-template-columns:1fr 1fr;gap:8px;margin:21px 0 30px}.stat-card{min-height:101px;padding:12px}.stat-card:last-child{grid-column:span 2;min-height:85px}.stat-card>strong{font-size:23px;margin:10px 0 4px}.stat-highlight>strong{font-size:22px}.pages-heading h2{font-size:13px}.page-row{gap:9px;min-height:78px}.page-thumbnail{width:74px;height:52px;padding:5px 6px}.page-thumbnail b{font-size:10px}.page-category{font-size:6px}.page-detail h3{font-size:8px;line-height:1.4}.page-date{font-size:7px}.page-status{padding:4px 5px;font-size:7px;gap:4px}.page-open{width:26px;height:26px}.create-empty{padding:8px}.create-empty small{font-size:7px}.dashboard-bottom{margin-top:20px}.orders-card,.domain-card{padding:13px}.order-line strong{font-size:8px}.order-line small{font-size:7px}.profile-card{padding:14px;gap:13px;flex-wrap:wrap}.profile-avatar{width:38px;height:38px}.profile-card>div:not(.profile-avatar){min-width:calc(50% - 35px)}.profile-card .button{margin-left:auto}.create-modal{padding:20px}.modal-header h2{font-size:23px}.order-detail-card{padding:12px;gap:8px}.order-detail-card strong{font-size:8px}.order-detail-card small{font-size:7px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* TPW-LP real dashboard data */
+.dashboard-review-count {
+  color: #d9a66b;
+  font-size: 11px;
+}
+
+.dashboard-empty {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 42px 20px;
+  border: 1px dashed #403b35;
+  color: #a9a196;
+  text-align: center;
+}
+
+.dashboard-empty svg {
+  color: #d99770;
+}
+
+.dashboard-empty strong {
+  color: #f0e9e0;
+  font-size: 14px;
+}
+
+.dashboard-empty p {
+  max-width: 420px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.page-edit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: auto;
+  min-width: 74px;
+  padding: 8px 10px;
+  color: #f3a17c;
+  border: 1px solid #614332;
+  text-decoration: none;
+  font-size: 10px;
+}
+
+.page-status-marker {
+  display: grid;
+  place-items: center;
+  color: #9dba9e;
+}
+
+.template-picker {
+  margin-top: 25px;
+  padding: 22px;
+  border: 1px solid #40382f;
+  background: #191714;
+}
+
+.template-picker-heading h2 {
+  margin: 8px 0 5px;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.template-picker-heading p {
+  color: #aaa197;
+  font-size: 11px;
+}
+
+.template-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.template-choice {
+  display: flex;
+  min-width: 0;
+  min-height: 145px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 15px;
+  border: 1px solid #494238;
+  background: #211e19;
+  color: #f0e9e0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.template-choice.selected {
+  border: 2px solid #f07845;
+  background: #2a2018;
+}
+
+.template-choice.not-ready {
+  opacity: .7;
+}
+
+.template-choice-number {
+  color: #d9a66b;
+  font-family: Georgia, serif;
+  font-size: 20px;
+}
+
+.template-choice strong {
+  font-size: 12px;
+}
+
+.template-choice small {
+  color: #aaa197;
+  font-size: 10px;
+}
+
+.template-choice-state {
+  margin-top: auto;
+  color: #c7a17d;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.template-choice-state.ready {
+  color: #9fce9d;
+}
+
+.template-picker-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 16px;
+  padding-top: 15px;
+  border-top: 1px solid #3a342d;
+  color: #b6ada2;
+  font-size: 11px;
+}
+
+.template-picker-action strong {
+  color: #f1e6d9;
+}
+
+.template-picker-action .button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.domain-panel {
+  width: 100%;
+  padding: 22px;
+  border: 1px solid #36322d;
+  background: #171614;
+}
+
+.domain-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  color: #d4a16c;
+}
+
+.domain-panel-heading h2 {
+  margin-top: 7px;
+  color: #f0e9e0;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.domain-scroll {
+  display: grid;
+  max-height: 270px;
+  overflow-y: auto;
+  border-top: 1px solid #393530;
+  border-bottom: 1px solid #393530;
+  scrollbar-width: thin;
+  scrollbar-color: #69543e #171614;
+}
+
+.domain-row {
+  display: flex;
+  min-height: 78px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 8px;
+  border-bottom: 1px solid #302d28;
+}
+
+.domain-row:last-child {
+  border-bottom: 0;
+}
+
+.domain-row > div {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
+.domain-row strong {
+  overflow-wrap: anywhere;
+  color: #f3a17c;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.domain-row small {
+  color: #aaa197;
+  font-size: 10px;
+}
+
+.domain-active,
+.domain-pending {
+  flex: 0 0 auto;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.domain-active {
+  color: #9bd49e;
+}
+
+.domain-pending {
+  color: #d8b17f;
+}
+
+.domain-empty,
+.domain-footnote {
+  color: #9d958b;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.domain-footnote {
+  margin-top: 14px;
+}
+
+@media (max-width: 760px) {
+  .template-picker-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .template-choice {
+    min-height: 115px;
+  }
+
+  .template-picker-action {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .template-picker-action .button {
+    justify-content: center;
+  }
+
+  .domain-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* TPW-LP dashboard typography hierarchy */
+.dashboard-greeting h1 {
+  font-size: clamp(29px, 3vw, 37px);
+  line-height: 1.16;
+  letter-spacing: -.035em;
+}
+
+.dashboard-greeting p {
+  margin-top: 9px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #b4aca2;
+}
+
+.pages-heading {
+  align-items: center;
+}
+
+.pages-heading h2 {
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+
+.pages-heading p {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #aaa197;
+}
+
+.pages-list .page-row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 104px;
+  padding: 13px 4px;
+}
+
+.page-thumbnail {
+  width: 112px;
+  height: 76px;
+  min-width: 112px;
+  overflow: hidden;
+}
+
+.page-thumbnail span {
+  font-size: 9px;
+  letter-spacing: .1em;
+}
+
+.page-thumbnail b {
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.page-detail {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 5px;
+}
+
+.page-detail .page-category {
+  color: #ff895f;
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.page-detail h3 {
+  margin: 0;
+  color: #f4eee7;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.page-detail .page-date {
+  color: #aaa197;
+  font-size: 10px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.page-status {
+  padding: 7px 10px;
+  font-size: 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.page-status.status-draft {
+  border-color: #365d42;
+  background: #18291e;
+  color: #9cdaa8;
+}
+
+.page-status.status-pending_review {
+  border-color: #70552f;
+  background: #2b2114;
+  color: #e8bd78;
+}
+
+.page-status.status-published {
+  border-color: #365d42;
+  background: #18291e;
+  color: #9cdaa8;
+}
+
+.page-status.status-rejected,
+.page-status.status-taken_down {
+  border-color: #67403a;
+  background: #291b18;
+  color: #e8a097;
+}
+
+.page-edit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 104px;
+  padding: 10px 12px;
+  border: 1px solid #477b51;
+  background: #1d3925;
+  color: #a9e2b0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.page-edit-link:hover {
+  background: #285033;
+  color: #ffffff;
+}
+
+.template-picker {
+  margin-top: 25px;
+  padding: 24px;
+}
+
+.template-picker-heading .section-tag {
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .13em;
+}
+
+.template-picker-heading h2 {
+  margin: 10px 0 6px;
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+.template-picker-heading p {
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.template-choice {
+  min-height: 145px;
+  padding: 17px;
+  gap: 10px;
+}
+
+.template-choice-number {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.template-choice strong {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.template-choice small {
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.template-choice-state {
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.template-choice-state.ready {
+  color: #9cdaa8;
+}
+
+.template-picker-action {
+  font-size: 12px;
+}
+
+.template-picker-action .button {
+  min-height: 42px;
+  background: #285b36;
+  border-color: #477b51;
+  color: #e6f6e9;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.template-picker-action .button:hover {
+  background: #347347;
+}
+
+@media (max-width: 760px) {
+  .pages-list .page-row {
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .page-thumbnail {
+    width: 88px;
+    min-width: 88px;
+    height: 70px;
+  }
+
+  .pages-list .page-status,
+  .pages-list .page-edit-link,
+  .pages-list .page-status-marker {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .page-edit-link {
+    min-width: 110px;
+  }
+
+  .pages-heading h2 {
+    font-size: 20px;
+  }
+
+  .template-picker {
+    padding: 16px;
+  }
+}
+
+/* TPW-LP Billing + Domain layout */
+.dashboard-bottom.dashboard-billing-domain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin-top: 25px;
+}
+
+.billing-panel,
+.domain-panel {
+  width: 100%;
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid rgba(255,255,255,.19);
+  background: #171614;
+}
+
+.billing-panel-heading,
+.domain-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.16);
+}
+
+.billing-panel-heading h2,
+.domain-panel-heading h2 {
+  margin: 7px 0 0;
+  color: #f2ece4;
+  font-size: 21px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+.billing-order-form {
+  display: grid;
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.billing-order-form label {
+  margin-top: 4px;
+  color: #bcb3a8;
+  font-size: 11px;
+}
+
+.billing-order-form select {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #49443d;
+  border-radius: 0;
+  background: #10100f;
+  color: #f2ece4;
+  font-size: 12px;
+}
+
+.billing-create-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  margin-top: 5px;
+  border: 1px solid #477b51;
+  background: #245334;
+  color: #e4f6e7;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.billing-create-button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.billing-instruction {
+  margin-top: 14px;
+  padding: 11px 12px;
+  border-left: 2px solid #d7a765;
+  background: #211c16;
+  color: #c5b7a5;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.billing-active-list {
+  display: grid;
+  margin-top: 12px;
+  border-bottom: 1px solid #3a3732;
+}
+
+.billing-active-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid #302d28;
+}
+
+.billing-active-row:last-child {
+  border-bottom: 0;
+}
+
+.billing-active-row > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.billing-active-row strong,
+.billing-order-top strong {
+  color: #eee7de;
+  font-size: 12px;
+}
+
+.billing-active-row small,
+.billing-order-top small {
+  color: #9f978c;
+  font-size: 10px;
+}
+
+.billing-paid,
+.billing-pending,
+.billing-rejected {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.billing-paid { color: #9cdaa8; }
+.billing-pending { color: #e3bd7e; }
+.billing-rejected { color: #e8a097; }
+
+.billing-history {
+  margin-top: 21px;
+}
+
+.billing-history-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #393530;
+}
+
+.billing-history-heading strong {
+  color: #e9e1d7;
+  font-size: 12px;
+}
+
+.billing-history-heading span {
+  color: #a99f93;
+  font-size: 10px;
+}
+
+.billing-empty {
+  padding: 18px 4px;
+  color: #a9a196;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.billing-order-row {
+  display: grid;
+  gap: 10px;
+  padding: 15px 2px;
+  border-bottom: 1px solid #302d28;
+}
+
+.billing-order-top,
+.billing-order-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.billing-order-top > div {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.billing-amount {
+  color: #f1c28f;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.billing-rejection-note {
+  margin: 0;
+  padding: 9px 10px;
+  background: #2a1a17;
+  color: #efaaa0;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.billing-proof-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 9px 12px;
+  border: 1px solid #477b51;
+  background: #1d3925;
+  color: #a9e2b0;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.billing-proof-button input {
+  display: none;
+}
+
+.dashboard-billing-domain .domain-panel {
+  align-self: start;
+}
+
+.dashboard-billing-domain .domain-scroll {
+  max-height: 270px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #69543e #171614;
+}
+
+.dashboard-billing-domain .domain-row {
+  min-height: 74px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-bottom.dashboard-billing-domain {
+    grid-template-columns: 1fr;
+  }
+
+  .billing-panel,
+  .domain-panel {
+    padding: 16px;
+  }
+}
+
+/* Five-template catalog */
+.template-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.template-choice {
+  min-width: 0;
+  min-height: 150px;
+  padding: 14px 12px;
+  gap: 9px;
+}
+
+.template-choice strong {
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.template-choice small {
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.template-choice-state {
+  font-size: 8px;
+}
+
+@media (min-width: 761px) and (max-width: 1050px) {
+  .template-picker-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .template-picker-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .template-choice {
+    min-height: 100px;
+    padding: 13px 15px;
+  }
+
+  .template-choice strong {
+    font-size: 13px;
+  }
+
+  .template-choice small {
+    font-size: 11px;
+  }
+}
+
+/* TPW-LP official brand logo */
+.brand-mark-image {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain;
+  object-position: center;
+  flex: 0 0 auto;
+}
+
+.dashboard-brand .brand-mark-image {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+/* TPW Store official QRIS */
+.billing-qris-panel {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 18px 12px;
+  border: 1px solid #403b34;
+  background: #211e19;
+  text-align: center;
+}
+
+.billing-qris-heading {
+  display: grid;
+  gap: 5px;
+}
+
+.billing-qris-heading strong {
+  color: #eee8df;
+  font-size: 14px;
+}
+
+.billing-qris-heading span {
+  color: #9bd49e;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.billing-qris-panel > p {
+  max-width: 310px;
+  margin: 0;
+  color: #c4baad;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.billing-qris-image {
+  display: block;
+  width: min(100%, 230px);
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+}
+
+.billing-qris-panel .billing-qris-note {
+  max-width: 330px;
+  font-size: 10px;
+  color: #a69c90;
+}
+
+@media(max-width:640px) {
+  .brand-mark-image {
+    width: 34px !important;
+    height: 34px !important;
+  }
+}
+
+/* ==================================================
+   TPW-LP BRAND + BILLING VISUAL COMPOSITION
+   ================================================== */
+
+/* Logo */
+.brand-mark-image {
+  display: block;
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.site-header .brand {
+  gap: 10px;
+}
+
+.dashboard-brand {
+  gap: 10px;
+}
+
+/* QRIS: desktop two-column composition */
+.billing-qris-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  grid-template-areas:
+    "heading image"
+    "intro image"
+    "note note";
+  align-items: center;
+  justify-items: stretch;
+  gap: 12px 18px;
+  padding: 18px;
+  text-align: left;
+}
+
+.billing-qris-heading {
+  grid-area: heading;
+  justify-items: start;
+}
+
+.billing-qris-panel > p:first-of-type {
+  grid-area: intro;
+  max-width: 100%;
+  align-self: start;
+}
+
+.billing-qris-image {
+  grid-area: image;
+  justify-self: end;
+  width: 100%;
+  max-width: 190px;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+}
+
+.billing-qris-panel .billing-qris-note {
+  grid-area: note;
+  max-width: none;
+  padding-top: 11px;
+  border-top: 1px solid #ffffff20;
+}
+
+/* Mobile: vertically stacked */
+@media (max-width: 640px) {
+  .brand-mark-image {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .billing-qris-panel {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "heading"
+      "intro"
+      "image"
+      "note";
+    justify-items: center;
+    padding: 16px 12px;
+    text-align: center;
+  }
+
+  .billing-qris-heading {
+    justify-items: center;
+  }
+
+  .billing-qris-panel > p:first-of-type {
+    text-align: center;
+  }
+
+  .billing-qris-image {
+    justify-self: center;
+    width: min(100%, 220px);
+    max-width: 220px;
+  }
+
+  .billing-qris-panel .billing-qris-note {
+    text-align: center;
+  }
+}
