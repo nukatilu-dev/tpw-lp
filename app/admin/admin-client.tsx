@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
+import { getLandingPageHostname } from "@/lib/domain"
 
 type LandingPage = {
   id: string
@@ -9,6 +10,7 @@ type LandingPage = {
   title: string
   template_key: string
   slug: string | null
+  domain_type: "lp" | "lpf"
   status: string
   review_note: string | null
   content: Record<string, unknown>
@@ -358,7 +360,7 @@ export default function AdminClient({
                     <div className="admin-page-meta">
                       <span>Slug: {page.slug || "Belum ditentukan"}</span>
                       {page.status === "published" && page.slug && (
-                        <a href={`https://${page.slug}.tpw.my.id`} target="_blank" rel="noreferrer">
+                        <a href={`https://${getLandingPageHostname(page.slug, page.domain_type)}`} target="_blank" rel="noreferrer">
                           Buka website ↗
                         </a>
                       )}

@@ -23,6 +23,7 @@ import {
   X,
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
+import { getLandingPageHostname } from "@/lib/domain"
 import type { CustomerLandingPage } from "./page"
 
 type CustomerOrder = {
@@ -76,13 +77,13 @@ const templates = [
     key: "digital-menu",
     name: "Digital Menu",
     description: "Menu restoran dan kuliner.",
-    ready: true,
+    ready: false,
   },
   {
     key: "product-catalog",
     name: "Product Catalog",
     description: "Katalog produk dan koleksi.",
-    ready: true,
+    ready: false,
   },
   {
     key: "personal-cv",
@@ -127,10 +128,7 @@ function formatDate(value: string) {
 }
 
 function getDomain(page: CustomerLandingPage) {
-  if (!page.slug) return null
-
-  const suffix = page.domain_type === "lpf" ? "-lpf" : "-lp"
-  return `${page.slug}${suffix}.tpw.my.id`
+  return getLandingPageHostname(page.slug, page.domain_type)
 }
 
 export default function DashboardClient({
@@ -1027,14 +1025,97 @@ export default function DashboardClient({
               <p className="page-lead">
                 Riwayat paket, pembayaran, dan masa aktif.
               </p>
-              <div className="dashboard-empty">
-                <FileImage size={26} />
-                <strong>Data transaksi belum tersedia.</strong>
-                <p>
-                  Informasi paket dan tombol pembayaran akan muncul
-                  setelah modul langganan diaktifkan.
-                </p>
-              </div>
+
+              {orders.length === 0 ? (
+                <div className="dashboard-empty">
+                  <FileImage size={26} />
+                  <strong>Belum ada tagihan.</strong>
+                  <p>
+                    Buat tagihan dari Dashboard setelah memiliki website.
+                  </p>
+                </div>
+              ) : (
+                <div className="billing-history">
+                  {orders.map((order) => {
+                    const payment = payments.find(
+                      (item) => item.order_id === order.id
+                    )
+                    const page = pages.find(
+                      (item) => item.id === order.landing_page_id
+                    )
+                    const amount = new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      maximumFractionDigits: 0,
+                    }).format(order.amount)
+
+                    return (
+                      <article className="billing-order-row" key={order.id}>
+                        <div className="billing-order-top">
+                          <div>
+                            <strong>{page?.title || "Website"}</strong>
+                            <small>
+                              {order.duration_months} bulan · {formatDate(order.created_at)}
+                            </small>
+                          </div>
+                          <strong className="billing-amount">{amount}</strong>
+                        </div>
+
+                        <div className="billing-order-bottom">
+                          {order.status === "paid" ? (
+                            <span className="billing-paid">
+                              Lunas
+                              {order.period_end
+                                ? ` · Aktif sampai ${formatDate(order.period_end)}`
+                                : ""}
+                            </span>
+                          ) : order.status === "payment_submitted" ? (
+                            <span className="billing-pending">
+                              Menunggu konfirmasi Admin
+                            </span>
+                          ) : order.status === "rejected" ? (
+                            <span className="billing-rejected">
+                              Pembayaran perlu diperbaiki
+                            </span>
+                          ) : (
+                            <span className="billing-pending">
+                              Belum lunas
+                            </span>
+                          )}
+                        </div>
+
+                        {payment?.rejection_note && (
+                          <p className="billing-rejection-note">
+                            Catatan Admin: {payment.rejection_note}
+                          </p>
+                        )}
+
+                        {(order.status === "pending_payment" ||
+                          order.status === "rejected") && (
+                          <label className="billing-proof-button">
+                            <FileImage size={14} />
+                            {payment?.status === "rejected"
+                              ? "Kirim ulang bukti pembayaran"
+                              : "Unggah bukti transfer"}
+                            <input
+                              type="file"
+                              accept="image/jpeg,image/png,image/webp,application/pdf"
+                              disabled={billingBusy}
+                              onChange={(event) => {
+                                const file = event.currentTarget.files?.[0]
+                                if (file) {
+                                  void uploadPaymentProof(order.id, file)
+                                }
+                                event.currentTarget.value = ""
+                              }}
+                            />
+                          </label>
+                        )}
+                      </article>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           ) : (
             <div className="simple-section">

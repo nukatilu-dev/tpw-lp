@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
+import { getLandingPageHostname } from "@/lib/domain"
 
 export const runtime = "nodejs"
 
@@ -123,6 +124,12 @@ export async function POST(request: Request) {
     } = { status: "skipped" }
 
     if (result?.owner_id && result.id) {
+      const { data: domainPage } = await supabase
+        .from("landing_pages")
+        .select("slug, domain_type")
+        .eq("id", result.id)
+        .maybeSingle()
+
       const { data: profile } = await supabase
         .from("profiles")
         .select("display_name, whatsapp_phone, whatsapp_opt_in")
@@ -149,9 +156,11 @@ export async function POST(request: Request) {
             }
           } else {
             const pageTitle = result.title || "Landing page Anda"
-            const siteUrl = result.slug
-              ? `https://${result.slug}.tpw.my.id`
-              : ""
+            const hostname = getLandingPageHostname(
+              domainPage?.slug ?? result.slug ?? null,
+              domainPage?.domain_type ?? null
+            )
+            const siteUrl = hostname ? `https://${hostname}` : ""
 
             const greeting = profile.display_name
               ? `Halo ${profile.display_name},`

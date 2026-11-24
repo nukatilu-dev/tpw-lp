@@ -96,6 +96,9 @@ export default function LoginPage() {
 
               <div className="password-label">
                 <label htmlFor="password">Password</label>
+                <Link href="/forgot-password" className="auth-forgot">
+                  Lupa password?
+                </Link>
               </div>
               <div className="input-shell">
                 <LockKeyhole size={17}/>

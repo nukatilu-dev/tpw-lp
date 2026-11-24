@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import { useState, type FormEvent } from "react"
+import { useRouter } from "next/navigation"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -35,7 +37,9 @@ export default function RegisterPage() {
       }
 
       if (data.session) {
-        setMessage("Akun berhasil dibuat. Silakan masuk ke halaman login.")
+        router.replace("/dashboard")
+        router.refresh()
+        return
       } else {
         setMessage(
           "Pendaftaran diterima. Periksa email untuk konfirmasi akun. Setelah konfirmasi, silakan login."

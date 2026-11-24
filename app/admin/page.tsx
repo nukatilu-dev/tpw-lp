@@ -11,6 +11,7 @@ type LandingPage = {
   title: string
   template_key: string
   slug: string | null
+  domain_type: "lp" | "lpf"
   status: string
   review_note: string | null
   content: Record<string, unknown>
@@ -52,7 +53,7 @@ export default async function AdminPage() {
   const { data: pageRows, error: pageError } = await supabase
     .from("landing_pages")
     .select(
-      "id, owner_id, title, template_key, slug, status, review_note, content, created_at, published_at"
+      "id, owner_id, title, template_key, slug, domain_type, status, review_note, content, created_at, published_at"
     )
     .order("created_at", { ascending: false })
 
