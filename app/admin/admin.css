@@ -222,3 +222,215 @@
   background: #285033;
   color: #ffffff;
 }
+
+/* =====================================================
+   TPW-LP MOBILE COMPACT UI — Admin Console
+   ===================================================== */
+@media (max-width: 720px) {
+  .admin-shell {
+    padding: 22px 14px 35px;
+  }
+
+  .admin-header {
+    gap: 13px;
+    padding-bottom: 18px;
+  }
+
+  .admin-header h1 {
+    font-size: 32px;
+    margin: 8px 0 5px;
+  }
+
+  .admin-header p {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .admin-account {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 12px;
+    gap: 4px;
+  }
+
+  .admin-account strong {
+    font-size: 11px;
+  }
+
+  .admin-account small,
+  .admin-account a {
+    font-size: 9px;
+  }
+
+  .admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin: 14px 0 20px;
+  }
+
+  .admin-stats > div {
+    gap: 5px;
+    padding: 9px 10px;
+  }
+
+  .admin-stats span {
+    font-size: 6px;
+    line-height: 1.4;
+    letter-spacing: .08em;
+  }
+
+  .admin-stats strong {
+    font-size: 23px;
+    line-height: 1;
+  }
+
+  .admin-tabs {
+    gap: 4px;
+    margin: 15px 0;
+  }
+
+  .admin-tabs button {
+    padding: 9px 10px;
+    font-size: 10px;
+  }
+
+  .admin-section-heading h2 {
+    font-size: 18px;
+  }
+
+  .admin-refresh {
+    padding: 8px 9px;
+    font-size: 9px;
+  }
+
+  .admin-controls {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin: 12px 0 8px;
+  }
+
+  .admin-search,
+  .admin-template-select {
+    padding: 10px;
+    font-size: 10px;
+  }
+
+  .admin-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 5px;
+    margin: 12px -14px;
+    padding: 0 14px 7px;
+    scrollbar-width: thin;
+  }
+
+  .admin-filters button {
+    flex: 0 0 auto;
+    padding: 7px 9px;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .admin-page-list {
+    gap: 8px;
+  }
+
+  .admin-page-card {
+    padding: 12px;
+  }
+
+  .admin-page-top {
+    gap: 8px;
+  }
+
+  .admin-page-top h3 {
+    font-size: 14px;
+    margin: 7px 0 3px;
+  }
+
+  .admin-owner {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    margin-top: 11px;
+    padding: 9px 0;
+  }
+
+  .admin-owner div {
+    gap: 4px;
+  }
+
+  .admin-owner small {
+    font-size: 7px;
+  }
+
+  .admin-owner strong {
+    font-size: 9px;
+  }
+
+  .admin-page-meta {
+    gap: 7px;
+    margin-top: 9px;
+    font-size: 9px;
+  }
+
+  .admin-content-preview {
+    margin-top: 9px;
+    font-size: 9px;
+  }
+
+  .admin-review-note {
+    margin-top: 9px;
+    padding: 8px;
+    font-size: 9px;
+  }
+
+  .admin-actions {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .admin-actions input {
+    flex-basis: 100%;
+    padding: 9px;
+    font-size: 10px;
+  }
+
+  .admin-button {
+    flex: 1;
+    padding: 9px 10px;
+    font-size: 9px;
+  }
+
+  .admin-logs {
+    margin-top: 12px;
+  }
+
+  .admin-log-row {
+    gap: 9px;
+    padding: 11px 3px;
+  }
+
+  .admin-log-main {
+    gap: 4px;
+  }
+
+  .admin-log-main strong {
+    font-size: 10px;
+  }
+
+  .admin-log-main span,
+  .admin-log-main small,
+  .admin-log-main p {
+    font-size: 9px;
+  }
+
+  .admin-empty {
+    padding: 35px 12px;
+  }
+
+  .admin-footer {
+    margin-top: 25px;
+    padding-top: 12px;
+  }
+}

@@ -3,6 +3,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
 
-export default nextConfig
+  allowedDevOrigins: ['10.0.0.250'],
+
+  distDir:
+    process.env.NODE_ENV === 'development'
+      ? '.next-dev'
+      : '.next',
+};
+
+export default nextConfig;

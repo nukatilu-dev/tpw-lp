@@ -66,39 +66,6 @@ type UserInfo = {
   referralCode: string
 }
 
-const templates = [
-  {
-    key: "business-profile",
-    name: "Business Profile",
-    description: "Profil usaha dan layanan.",
-    ready: true,
-  },
-  {
-    key: "digital-menu",
-    name: "Digital Menu",
-    description: "Menu restoran dan kuliner.",
-    ready: false,
-  },
-  {
-    key: "product-catalog",
-    name: "Product Catalog",
-    description: "Katalog produk dan koleksi.",
-    ready: false,
-  },
-  {
-    key: "personal-cv",
-    name: "Personal CV",
-    description: "Profil dan pengalaman profesional.",
-    ready: false,
-  },
-  {
-    key: "creative-portfolio",
-    name: "Creative Portfolio",
-    description: "Karya dan proyek kreatif.",
-    ready: false,
-  },
-]
-
 const templateNames: Record<string, string> = {
   "business-profile": "Business Profile",
   "digital-menu": "Digital Menu",
@@ -124,6 +91,7 @@ function formatDate(value: string) {
     day: "2-digit",
     month: "short",
     year: "numeric",
+    timeZone: "Asia/Jakarta",
   })
 }
 
@@ -145,8 +113,6 @@ export default function DashboardClient({
   subscriptions: CustomerSubscription[]
 }) {
   const [active, setActive] = useState("Overview")
-  const [selectedTemplate, setSelectedTemplate] =
-    useState("business-profile")
   const [mobileNav, setMobileNav] = useState(false)
   const [toast, setToast] = useState("")
   // Website yang sudah ditakedown tidak dapat dibuatkan tagihan baru.
@@ -178,10 +144,6 @@ export default function DashboardClient({
 
   const domains = pages.filter((page) => page.slug)
 
-  const selected = templates.find(
-    (template) => template.key === selectedTemplate
-  )
-
   async function logout() {
     const supabase = createClient()
     await supabase.auth.signOut()
@@ -191,20 +153,6 @@ export default function DashboardClient({
   function announce(message: string) {
     setToast(message)
     window.setTimeout(() => setToast(""), 3500)
-  }
-
-  function startDraft() {
-    if (!selected?.ready) {
-      announce("Editor template tersebut sedang disiapkan.")
-      return
-    }
-
-    if (counts.draftSlotsUsed >= MAX_DRAFT_SLOTS) {
-      announce("Batas maksimal 3 draft telah tercapai. Hapus draft atau selesaikan pengajuan yang ada terlebih dahulu.")
-      return
-    }
-
-    window.location.assign("/dashboard/editor/new")
   }
 
   async function createBillingOrder() {
@@ -692,64 +640,41 @@ export default function DashboardClient({
                   </div>
                 )}
 
-                <div className="template-picker">
-                  <div className="template-picker-heading">
-                    <div>
-                      <span className="section-tag">
-                        START A NEW WEBSITE
-                      </span>
-                      <h2>Pilih Template.</h2>
-                      <p>Pilih model website untuk membuat draft baru. Maksimal 3 slot draft per akun.</p>
-                    </div>
-                  </div>
-
-                  <div className="template-picker-grid">
-                    {templates.map((template, index) => (
-                      <button
-                        key={template.key}
-                        type="button"
-                        className={`template-choice ${
-                          selectedTemplate === template.key
-                            ? "selected"
-                            : ""
-                        } ${!template.ready ? "not-ready" : ""}`}
-                        onClick={() => setSelectedTemplate(template.key)}
-                      >
-                        <span className="template-choice-number">
-                          0{index + 1}
-                        </span>
-                        <strong>{template.name}</strong>
-                        <small>{template.description}</small>
-                        <span
-                          className={`template-choice-state ${
-                            template.ready ? "ready" : ""
-                          }`}
-                        >
-                          {template.ready ? "SIAP DIGUNAKAN" : "DALAM PENGERJAAN"}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="template-picker-action">
-                    <span>
-                      <span>Dipilih: <strong>{selected?.name}</strong></span>
-                      <br />
-                      <small>
-                        Slot draft: {counts.draftSlotsUsed}/{MAX_DRAFT_SLOTS} terpakai · {Math.max(0, MAX_DRAFT_SLOTS - counts.draftSlotsUsed)} tersisa
-                      </small>
+                <section className="create-website-card">
+                  <div>
+                    <span className="section-tag">
+                      START YOUR DIGITAL PRESENCE
                     </span>
-                    <button
-                      className="button"
-                      disabled={!selected?.ready || counts.draftSlotsUsed >= MAX_DRAFT_SLOTS}
-                      onClick={startDraft}
-                    >
-                      <Plus size={16} />
-                      Buat Draft
-                      <ArrowRight size={16} />
-                    </button>
+                    <h2>Website Anda, dimulai dari sini.</h2>
+                    <p>
+                      Buat website sendiri dengan memilih salah satu panduan
+                      desain, lalu sesuaikan isi dan tampilannya sesuai kebutuhan.
+                    </p>
+                    <small>
+                      Slot draft: {counts.draftSlotsUsed}/{MAX_DRAFT_SLOTS} terpakai
+                      {" · "}
+                      {Math.max(0, MAX_DRAFT_SLOTS - counts.draftSlotsUsed)} tersisa
+                    </small>
                   </div>
-                </div>
+
+                  <Link
+                    href="/dashboard/editor/new"
+                    className="button"
+                    aria-disabled={counts.draftSlotsUsed >= MAX_DRAFT_SLOTS}
+                    onClick={(event) => {
+                      if (counts.draftSlotsUsed >= MAX_DRAFT_SLOTS) {
+                        event.preventDefault()
+                        announce(
+                          "Slot draft sudah penuh. Hapus atau selesaikan draft terlebih dahulu."
+                        )
+                      }
+                    }}
+                  >
+                    <Plus size={17} />
+                    Buat Web Anda
+                    <ArrowRight size={17} />
+                  </Link>
+                </section>
               </section>
 
               <section className="dashboard-bottom dashboard-billing-domain">

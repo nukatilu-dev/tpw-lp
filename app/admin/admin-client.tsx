@@ -81,7 +81,7 @@ export default function AdminClient({
   profiles: Record<string, ProfileInfo>
 }) {
   const router = useRouter()
-  const [tab, setTab] = useState<"pages" | "logs">("pages")
+  const [tab, setTab] = useState<"pages" | "guides" | "logs">("pages")
   const [filter, setFilter] = useState<Filter>("pending_review")
   const [search, setSearch] = useState("")
   const [templateFilter, setTemplateFilter] = useState("all")
@@ -248,6 +248,12 @@ export default function AdminClient({
           onClick={() => setTab("pages")}
         >
           Landing Pages <span>{pages.length}</span>
+        </button>
+        <button
+          className={tab === "guides" ? "active" : ""}
+          onClick={() => setTab("guides")}
+        >
+          Template Guide
         </button>
         <button
           className={tab === "logs" ? "active" : ""}
@@ -437,6 +443,32 @@ export default function AdminClient({
               })}
             </div>
           )}
+        </section>
+      ) : tab === "guides" ? (
+        <section className="admin-workspace">
+          <div className="admin-section-heading">
+            <div>
+              <div className="admin-eyebrow">TEMPLATE MANAGEMENT</div>
+              <h2>Template Guide</h2>
+              <p className="admin-log-description">
+                Lihat dan uji lima contoh Content Guide TPW sebelum digunakan pelanggan.
+              </p>
+            </div>
+            <a className="admin-refresh" href="/admin/template-guides">
+              Buka Template Guide ↗
+            </a>
+          </div>
+          <div className="admin-empty">
+            <span>✳</span>
+            <h3>Template Guide TPW</h3>
+            <p>
+              Kelola pemeriksaan tampilan Tahu Hejo, Leeloo, Kedai Kopi,
+              Katalog Produk, dan Kreatif Sendiri melalui halaman preview.
+            </p>
+            <a className="admin-refresh" href="/admin/template-guides">
+              Lihat dan uji Template Guide ↗
+            </a>
+          </div>
         </section>
       ) : (
         <section className="admin-workspace">

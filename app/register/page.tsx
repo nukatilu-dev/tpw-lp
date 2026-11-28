@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
+import { getAuthRedirectUrl } from "@/lib/auth/redirect-url"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -28,6 +29,7 @@ export default function RegisterPage() {
         password,
         options: {
           data: { full_name: name.trim() },
+          emailRedirectTo: getAuthRedirectUrl("/auth/callback?next=/dashboard"),
         },
       })
 

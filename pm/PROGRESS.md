@@ -61,3 +61,21 @@ Last update: 2026-11-22
 - Jangan memperluas scope di luar keputusan MVP.
 - Jangan menandai task DONE sebelum berfungsi dan diuji.
 - Fokus sampai deploy dan publish.
+
+## 2026-11-28 — TPW-LP Business Profile Editor
+
+Status: Business Profile Editor — UX refinement.
+
+Completed:
+- Floating Workspace dengan empat kategori.
+- Persistent action bar: Save, Ajukan, Dashboard.
+- Workspace auto-hide setelah 10 detik tanpa aktivitas.
+- Direct text editing dari live preview.
+- Theme color combinations untuk Header dan background.
+- Perbaikan Hero Business Profile: frame gambar, ukuran, rasio, dan tampilan responsive.
+- Pembersihan konflik aturan CSS Hero.
+
+Scope:
+- Fokus tetap pada Business Profile.
+- Template lain belum dikerjakan.
+- Universal Editor dipertahankan sebagai fondasi template berikutnya.

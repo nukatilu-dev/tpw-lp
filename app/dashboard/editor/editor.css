@@ -307,3 +307,139 @@
   padding-top: 16px;
   border-top: 1px solid #403b34;
 }
+
+
+/* ==================================================
+   TPW-LP COMPACT EDITOR UI — visual-only overrides
+   ================================================== */
+.bp-editor {
+  min-height: 100vh;
+  padding: 20px clamp(12px, 2.5vw, 32px);
+}
+
+.bp-editor-header {
+  gap: 14px;
+  padding-bottom: 16px;
+}
+
+.bp-back {
+  margin-bottom: 10px;
+}
+
+.bp-editor-header h1 {
+  font-size: clamp(25px, 3vw, 36px);
+}
+
+.bp-editor-header p {
+  margin: 5px 0 0;
+  line-height: 1.5;
+}
+
+.bp-editor-actions button {
+  padding: 9px 12px;
+}
+
+.bp-editor-layout {
+  grid-template-columns: minmax(280px, 350px) minmax(0, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.bp-form {
+  gap: 7px;
+  padding: 16px;
+}
+
+.bp-form-heading {
+  margin: 9px 0 5px;
+  padding-bottom: 9px;
+}
+
+.bp-form-heading h2 {
+  font-size: 19px;
+}
+
+.bp-form input:not([type="color"]),
+.bp-form textarea {
+  padding: 9px 10px;
+  font-size: 12px;
+}
+
+.bp-service-editor {
+  padding: 10px;
+}
+
+.bp-upload-card {
+  gap: 8px;
+  padding: 10px;
+}
+
+.bp-preview-bar {
+  padding: 9px 12px;
+}
+
+.bp-preview > main {
+  min-height: 720px;
+}
+
+@media (max-width: 1000px) {
+  .bp-editor-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bp-preview {
+    grid-row: 1;
+  }
+
+  .bp-preview > main {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 650px) {
+  .bp-editor {
+    padding: 13px 11px 24px;
+  }
+
+  .bp-editor-header {
+    gap: 12px;
+    padding-bottom: 13px;
+  }
+
+  .bp-editor-header h1 {
+    font-size: 27px;
+  }
+
+  .bp-editor-header p {
+    font-size: 11px;
+  }
+
+  .bp-editor-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .bp-editor-actions button {
+    min-height: 38px;
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+
+  .bp-form {
+    padding: 12px;
+  }
+
+  .bp-preview-bar {
+    font-size: 8px;
+    padding: 8px 10px;
+  }
+
+  .bp-preview > main {
+    min-height: 520px;
+  }
+
+  .bp-color-row {
+    gap: 8px;
+  }
+}

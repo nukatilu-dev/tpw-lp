@@ -29,6 +29,31 @@ export const TEMPLATE_DEFINITIONS = [
 export type TemplateKey =
   (typeof TEMPLATE_DEFINITIONS)[number]["key"]
 
+
+/** Visual composition owned by each Theme Template. Theme Style only skins it. */
+export const TEMPLATE_DESIGNS = {
+  "business-profile": {
+    hero: "split", section: "editorial", cards: "soft", gallery: "mosaic",
+    description: "Hero foto dan identitas usaha, dilanjutkan cerita, layanan, galeri, dan kontak.",
+  },
+  "personal-cv": {
+    hero: "profile", section: "timeline", cards: "line", gallery: "filmstrip",
+    description: "Identitas personal yang kuat, ringkasan profil, keahlian, pengalaman, dan pendidikan.",
+  },
+  "digital-menu": {
+    hero: "centered", section: "menu", cards: "menu", gallery: "none",
+    description: "Menu berorientasi pemesanan dengan kategori dan daftar hidangan yang mudah dipindai.",
+  },
+  "product-catalog": {
+    hero: "catalog", section: "catalog", cards: "product", gallery: "none",
+    description: "Katalog visual dengan grid produk, harga, kategori, dan kontak pemesanan.",
+  },
+  "creative-portfolio": {
+    hero: "statement", section: "portfolio", cards: "project", gallery: "masonry",
+    description: "Pernyataan kreatif yang kuat dan ruang karya yang menjadi pusat perhatian.",
+  },
+} as const
+
 export type TemplateContent = Record<string, unknown>
 
 const DEFAULT_CONTENT: Record<TemplateKey, TemplateContent> = {
